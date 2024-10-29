@@ -1,8 +1,3 @@
-## Setup User and Discord Message.
-$discWeb = "Insert Webhook link"
-$User = "RDPuser"
-$Pass = ConvertTo-SecureString "pass1234" -AsPlainText -Force
-
 ## Getting IPV4 Addresses.
 $PubIP = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 $LocalIP = (
@@ -55,8 +50,6 @@ Write-Host 'Winget is updating and gonna start installing different softwares. T
 
 Write-Host ''
 
-winget source update
-
 winget install -e --id Brave.Brave
 winget install -e --id 7zip.7zip
 winget install -e --id Notepad++.Notepad++
@@ -73,7 +66,12 @@ Write-Host 'Making RDP user "Only if user is Admin"' -ForegroundColor Green
 ## Checks if you are the admin Local account
 $admUsr = [Security.Principal.WindowsIdentity]::GetCurrent().Name.Split('\')[-1]
 if ($admUsr -eq "Admin") {
-    ## Creating the user
+
+## Setup User.
+$User = "RDPuser"
+$Pass = ConvertTo-SecureString "pass1234" -AsPlainText -Force
+
+## Creating the user
 New-LocalUser -Name "$User" -Password $Pass -FullName "$User" -Description "Remote Desktop Account"
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
 
@@ -82,6 +80,7 @@ Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
 }
 
 ## Outputs the message to Discord
+$discWeb = "https://discord.com/api/webhooks/1297616163697590422/LR-fL-KEhPSpWElIa9kwHt6bifVY9ZHzYIDH-k_im5YrOQTxOu2AO7DBWgHG9VhbLmD2"
 $discEmbed = @{
     title = "Virtual Machine is ready to connect to"
     description = "
