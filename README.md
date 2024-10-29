@@ -15,7 +15,7 @@ Simple Windows poweshell script that'll run with custom ISO images
   
 That’s it! This script automates my VM setup, making it ready to go with the tools I need.
 
-# Todo:
+### Todo:
 - Auto Default Browser
 - Randomly Generated RDP User lognis.
 - Auto Agree for Widget so no manual input needed.
