@@ -1,8 +1,8 @@
 # WAS-WinAutoSys
 Simple Windows poweshell script that'll run with custom ISO images
 
-# This is a simple script made for easy deployment of Windows 11 VMs, automatically setting up essential tools and configurations. 
-## Here’s what it does:
+## This is a simple script made for easy deployment of Windows 11 VMs, automatically setting up essential tools and configurations. 
+### Here’s what it does:
 - Removes the Microsoft Edge icon from the desktop for a cleaner workspace.
 - Installs Brave Browser (planning to add auto-default browser settings).
 - Installs 7-Zip for file compression.
@@ -18,4 +18,6 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 # Todo:
 - Auto Default Browser
 - Randomly Generated RDP User lognis.
+- Auto Agree for Widget so no manual input needed.
+- Self Choose of Browser, VPN Client, Torrent Software and File Compression Software.
 
