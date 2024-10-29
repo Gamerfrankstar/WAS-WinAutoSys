@@ -80,9 +80,9 @@ Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
 }
 
 ## Outputs the message to Discord
-$discWeb = "https://discord.com/api/webhooks/1297616163697590422/LR-fL-KEhPSpWElIa9kwHt6bifVY9ZHzYIDH-k_im5YrOQTxOu2AO7DBWgHG9VhbLmD2"
+$discWeb = "Insert Webhook link"
 $discEmbed = @{
-    title = "Virtual Machine is ready to connect to"
+    title = "Virtual Machine is ready to connect."
     description = "
     Device Public IPv4 Address: **$PubIP**
     Device local IPV4 Address : **$LocalIP**
