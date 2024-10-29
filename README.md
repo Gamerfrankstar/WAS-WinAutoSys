@@ -16,6 +16,6 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 
 # Todo:
 - Auto Default Browser
-- Auto RDP user login
 - Custom Message Outputs (Through Discord or Console on Proxmox depends what's easier)
+- Randomly Generated RDP User lognis.
 
