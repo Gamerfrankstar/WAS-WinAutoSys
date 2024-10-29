@@ -11,11 +11,11 @@ Simple Windows poweshell script that'll run with custom ISO images
 - Installs Discord, useful for bot development or other Discord-related activities.
 - Installs qBittorrent for secure file downloads.
 - Creates an RDP user so you can connect to the VM directly. (Be cautious with security settings to prevent unauthorized access.)
+- Message Output to Discord to let you know VM is ready to connect to via RDP.
   
 That’s it! This script automates my VM setup, making it ready to go with the tools I need.
 
 # Todo:
 - Auto Default Browser
-- Custom Message Outputs (Through Discord or Console on Proxmox depends what's easier)
 - Randomly Generated RDP User lognis.
 
