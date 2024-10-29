@@ -1,3 +1,18 @@
+## Setup User and Discord Message.
+$discWeb = "Insert Webhook link"
+$User = "RDPuser"
+$Pass = ConvertTo-SecureString "pass1234" -AsPlainText -Force
+
+## Getting IPV4 Addresses.
+$PubIP = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
+$LocalIP = (
+    Get-NetIPConfiguration |
+    Where-Object {
+        $_.IPv4DefaultGateway -ne $null -and
+        $_.NetAdapter.Status -ne "Disconnected"
+    }
+).IPv4Address.IPAddress
+
 ## Checks if its running as Admin
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
@@ -58,18 +73,34 @@ Write-Host 'Making RDP user "Only if user is Admin"' -ForegroundColor Green
 ## Checks if you are the admin Local account
 $admUsr = [Security.Principal.WindowsIdentity]::GetCurrent().Name.Split('\')[-1]
 if ($admUsr -eq "Admin") {
-
-## User and Pass
-$user = "RDPuser"
-$pass = ConvertTo-SecureString "Gamerfrankstar1234" -AsPlainText -Force
-
-## Creating the user
-New-LocalUser -Name "$user" -Password $pass -FullName "$user" -Description "Remote Desktop Account"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$user"
+    ## Creating the user
+New-LocalUser -Name "$User" -Password $Pass -FullName "$User" -Description "Remote Desktop Account"
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
 
 } else {
 	Write-Host "You aren't the Admin user so no RDP Local user will be Created." -ForegroundColor Green
 }
+
+## Outputs the message to Discord
+$discEmbed = @{
+    title = "Virtual Machine is ready to connect to"
+    description = "
+    Device Public IPv4 Address: **$PubIP**
+    Device local IPV4 Address : **$LocalIP**
+    User: **$User**
+    Password: **$Pass**"
+    color = 5814783  ## For Custom Colors
+}
+
+## Bot Name
+$discMessage = @{
+    username = "VM BOT"
+    embeds = @($discEmbed)
+}
+
+## Webhook Payload
+$jsonMessage = $discMessage | ConvertTo-Json -Depth 4
+Invoke-RestMethod -Uri $discWeb -Method Post -Body $jsonMessage -ContentType "application/json"
 
 Write-Host "Everything is set." -ForegroundColor Green
 
