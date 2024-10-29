@@ -18,6 +18,6 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 ### Todo:
 - Auto Default Browser
 - Randomly Generated RDP User lognis.
-- Auto Agree for Widget so no manual input needed.
+- Auto Agree for Winget so no manual input needed.
 - Self Choose of Browser, VPN Client, Torrent Software and File Compression Software.
 
