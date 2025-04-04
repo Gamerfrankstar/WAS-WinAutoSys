@@ -10,7 +10,19 @@ Simple Windows poweshell script that'll run with custom ISO images
   
 That’s it! This script automates my VM setup, making it ready to go with the tools I need.
 
-### Tools That can be installed with this Script.
+## The 2 different types installations
+### Standard Installation 
+- Browser: Brave
+- VPN: Mullvad
+- Torrent: qBitTorrent
+- File Archievers: 7zip
+- Text Editor: VS Code
+- Media: Discord
+
+### Advanced Installation
+- This installation you can pick from the list below when installing.
+  
+## Tools That can be installed with this Script.
 #### Browsers
 - Chrome, Brave, Opera, Tor Browser, Firefox and LibreWolf Browser.
   
@@ -27,6 +39,7 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 - Notepad++, VS Code and Vim.
 
 ### Todo:
+- Add a no bloat feature function so it removes stuff that can cause bloat (Debloats Win11 so u don't have to use a Autoattend file all the time)
 - Auto Default Browser
 - Randomly Generated RDP User lognis.
 - Auto Agree for Winget so no manual input needed.
