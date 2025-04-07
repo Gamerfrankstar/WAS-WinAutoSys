@@ -7,6 +7,7 @@ Simple Windows poweshell script that'll run with custom ISO images
 - Install Different Softwares on a system. (Browser, VPN, Torrenting, Text Editor and File Archiever)
 - Creates an RDP user so you can connect to the VM directly. (Be cautious with security settings to prevent unauthorized access.)
 - Message Output to Discord to let you know VM is ready to connect to via RDP.
+- De-Bloats Windows
   
 That’s it! This script automates my VM setup, making it ready to go with the tools I need.
 
@@ -39,7 +40,6 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 - Notepad++, VS Code and Vim.
 
 ### Todo:
-- Add a no bloat feature function so it removes stuff that can cause bloat (Debloats Win11 so u don't have to use a Autoattend file all the time)
 - Auto Default Browser
 - Randomly Generated RDP User lognis.
 - Auto Agree for Winget so no manual input needed.
