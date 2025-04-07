@@ -378,7 +378,7 @@ winget install -e --id $selectTorrent
 # Discord installation
 $discinstall = Read-host "Do you want to install Discord? (Y/N)"
 if ($discinstall -ieq "Y") {
-    winget install -e -id Discord.Discord
+    winget install -e --id Discord.Discord
 } elseif ($discinstall -ieq "N") {
     Write-Host "Discord won't get installed" -ForegroundColor Red
 } else {
