@@ -40,6 +40,7 @@ That’s it! This script automates my VM setup, making it ready to go with the t
 - Notepad++, VS Code and Vim.
 
 ### Todo:
-- Auto Default Browser
+- Registry Editing to remove alot more Win11 Spyware.
+- Auto Default Browser.
 - Randomly Generated RDP User lognis.
 - Auto Agree for Winget so no manual input needed.
