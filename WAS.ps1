@@ -101,7 +101,7 @@ function StandardInstall {
         }
         
         elseif ($rdpmk -ieq "N") {
-            
+            Write-Host "No RDP user will be made"
         }
 
     Write-Host "Everything is set." -ForegroundColor Green
@@ -204,7 +204,7 @@ Password: **$Pass**
     }
     
     elseif ($rdpmk -ieq "N") {
-        
+        Write-Host "No RDP user will be made"
     }
 
 Write-Host "Everything is set." -ForegroundColor Green
