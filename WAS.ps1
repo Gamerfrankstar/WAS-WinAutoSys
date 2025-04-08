@@ -1,7 +1,6 @@
 function StandardInstall {
     clear-host
         
-            ## Getting IPV4 Addresses.
             $PubIP = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
             $LocalIP = (
             Get-NetIPConfiguration |
@@ -11,7 +10,6 @@ function StandardInstall {
             }
         ).IPv4Address.IPAddress
 
-        ## Banner
         $banner = "
  __        ___          _         _       ____            
  \ \      / (_)_ __    / \  _   _| |_ ___/ ___| _   _ ___ 
@@ -21,13 +19,12 @@ function StandardInstall {
                                                 |___/     
 "	
 
-        write-host "$banner"
+        write-host "$banner" -ForegroundColor Cyan
         Write-Host "Standard Installation"
         write-Host ''
         Write-Host 'Removing from Desktop Microsoft Edge' -ForegroundColor Green
         write-Host ''
 
-        ## Removes Microsoft Edge Icon from Dekstop
         Get-ChildItem C:\Users\ | ForEach-Object {
         $desktopPath = "$($_.FullName)\Desktop\Microsoft Edge.lnk"
         if (Test-Path $desktopPath) {
@@ -37,10 +34,9 @@ function StandardInstall {
 
         Write-Host ''
 
-        ## Start installing Softwares
         Write-Host 'Winget is updating and gonna start installing different softwares. This will take some time please be patient!!!' -ForegroundColor Green
 
-        winget install -e --id Brave.Brave 
+        winget install -e --id Brave.Brave
         winget install -e --id MullvadVPN.MullvadVPN
         winget install -e --id qBittorrent.qBittorrent
         winget install -e --id 7zip.7zip
@@ -57,11 +53,9 @@ function StandardInstall {
         if($rdpmk -ieq "Y"){ 
             Write-Host 'Making RDP user' -ForegroundColor Green
    
-            ## Setup User.
             $User = read-host "What Username?"
             $Pass = ConvertTo-SecureString read-host "What Password?" -AsPlainText -Force
 
-            ## Creating the user
             New-LocalUser -Name "$User" -Password $Pass -FullName "$User" -Description "Remote Desktop Account"
             Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
         }
@@ -79,7 +73,6 @@ function StandardInstall {
         if ($discpayout -ieq "Y"){
         $dischook = read-host "Insert Webhook link"
 
-        ## Outputs the message to Discord
         $discWeb = "$dischook"
         $discEmbed = @{
         title = "Virtual Machine is ready to connect."
@@ -89,15 +82,13 @@ function StandardInstall {
     User: **$User**
     Password: **$Pass** 
     "
-        color = 5814783  ## For Custom Colors
+        color = 5814783  
         }
-        ## Bot Name
         $discMessage = @{
         username = "VM BOT"
         embeds = @($discEmbed)
         }
 
-        ## Webhook Payload
         $jsonMessage = $discMessage | ConvertTo-Json -Depth 4
         Invoke-RestMethod -Uri $discWeb -Method Post -Body $jsonMessage -ContentType "application/json"
         }
@@ -121,7 +112,6 @@ function StandardInstall {
 function advancedinstall {
     clear-host
     
-        ## Getting IPV4 Addresses.
         $PubIP = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
         $LocalIP = (
         Get-NetIPConfiguration |
@@ -131,7 +121,6 @@ function advancedinstall {
         }
     ).IPv4Address.IPAddress
 
-    ## Banner
     $banner = "
 __        ___          _         _       ____            
 \ \      / (_)_ __    / \  _   _| |_ ___/ ___| _   _ ___ 
@@ -141,13 +130,13 @@ __        ___          _         _       ____
                                             |___/     
 "	
 
-    write-host "$banner"
+    write-host "$banner" -ForegroundColor Cyan
     Write-Host "Advanced Installation"
     write-Host ''
     Write-Host 'Removing from Desktop Microsoft Edge' -ForegroundColor Green
     write-Host ''
 
-    ## Removes Microsoft Edge Icon from Dekstop
+
     Get-ChildItem C:\Users\ | ForEach-Object {
     $desktopPath = "$($_.FullName)\Desktop\Microsoft Edge.lnk"
     if (Test-Path $desktopPath) {
@@ -157,7 +146,6 @@ __        ___          _         _       ____
 
     Write-Host ''
 
-    ## Start installing Softwares
     Write-Host 'Software installation Selections menu' -ForegroundColor Green
     softwareinstallmenu
     
@@ -168,11 +156,9 @@ __        ___          _         _       ____
     if($rdpmk -ieq "Y"){ 
         Write-Host 'Making RDP user' -ForegroundColor Green
 
-        ## Setup User.
         $User = read-host "What Username?"
         $Pass = ConvertTo-SecureString read-host "What Password?" -AsPlainText -Force
 
-        ## Creating the user
         New-LocalUser -Name "$User" -Password $Pass -FullName "$User" -Description "Remote Desktop Account"
         Add-LocalGroupMember -Group "Remote Desktop Users" -Member "$User"
     }
@@ -190,7 +176,6 @@ __        ___          _         _       ____
     if ($discpayout -ieq "Y"){
     $dischook = read-host "Insert Webhook link"
 
-    ## Outputs the message to Discord
     $discWeb = "$dischook"
     $discEmbed = @{
     title = "Virtual Machine is ready to connect."
@@ -200,15 +185,13 @@ Device local IPV4 Address : **$LocalIP**
 User: **$User**
 Password: **$Pass** 
 "
-    color = 5814783  ## For Custom Colors
+    color = 5814783 
     }
-    ## Bot Name
     $discMessage = @{
     username = "VM BOT"
     embeds = @($discEmbed)
     }
 
-    ## Webhook Payload
     $jsonMessage = $discMessage | ConvertTo-Json -Depth 4
     Invoke-RestMethod -Uri $discWeb -Method Post -Body $jsonMessage -ContentType "application/json"
     }
@@ -368,17 +351,15 @@ if ($selecttext -ieq "Notepad++") {
 
 Write-Host "$selectedtext has been selected" -ForegroundColor Green
 
-# Install software
-winget install -e --id $selectbrowser
+winget install -e --id $selectbrowser 
 winget install -e --id $selectfile
 winget install -e --id $selecttext
 winget install -e --id $selectvpn
 winget install -e --id $selectTorrent
 
-# Discord installation
 $discinstall = Read-host "Do you want to install Discord? (Y/N)"
 if ($discinstall -ieq "Y") {
-    winget install -e --id Discord.Discord
+    winget install -e -id Discord.Discord
 } elseif ($discinstall -ieq "N") {
     Write-Host "Discord won't get installed" -ForegroundColor Red
 } else {
@@ -387,6 +368,143 @@ if ($discinstall -ieq "Y") {
 
 Write-Host "Software installation is complete!" -ForegroundColor Green
 }
+
+function nobloat{
+    $banner = "
+__        ___          _         _       ____            
+\ \      / (_)_ __    / \  _   _| |_ ___/ ___| _   _ ___ 
+ \ \ /\ / /| | '_ \  / _ \| | | | __/ _ \___ \| | | / __|
+  \ V  V / | | | | |/ ___ \ |_| | || (_) |__) | |_| \__ \
+   \_/\_/  |_|_| |_/_/   \_\__,_|\__\___/____/ \__, |___/
+                                            |___/     
+"	
+    Clear-Host
+    write-host "$banner" -ForegroundColor Cyan
+    Write-Host "De-Bloating Windows"
+    write-Host ''
+
+    Get-AppxPackage *Recall* | Remove-AppxPackage
+    Write-Host "Uninstalled Recall" -ForegroundColor Green
+
+    Get-AppxPackage *Teams* | Remove-AppxPackage
+    Write-Host "Uninstalled Teams" -ForegroundColor Green
+
+    Get-AppxPackage *Cortana* | Remove-AppxPackage
+    Write-Host "Uninstalled Cortana" -ForegroundColor Green
+
+    Get-AppxPackage *office* | Remove-AppxPackage
+    Write-Host "Uninstalled Office365" -ForegroundColor Green
+
+    Get-AppxPackage *clipchamp* | Remove-AppxPackage
+    Write-Host "Uninstalled clipchamp" -ForegroundColor Green
+
+    C:\Windows\system32\OneDriveSetup.exe /uninstall
+    Write-Host "Uninstalled Onedrive" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Todos* | Remove-AppxPackage
+    Write-Host "Uninstalled ToDo" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.OutlookForWindows* | Remove-AppxPackage
+    Write-Host "Uninstalled Outlook" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Windows.DevHome* | Remove-AppxPackage
+    Write-Host "Uninstalled DevHome" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage
+    Write-Host "Uninstalled StickyNote" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage
+    Write-Host "Uninstalled Get Help" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.GamingApp* | Remove-AppxPackage
+    Write-Host "Uninstalled Gamingapp" -ForegroundColor Green
+
+    Get-AppxPackage *3DViewer* | Remove-AppxPackage
+    Write-Host "Uninstalled 3DViewer" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Copilot* | Remove-AppxPackage
+    Write-Host "Uninstalled Copilot" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
+    Write-Host "Uninstalled Feedback Hub" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Windows.Input.* | Remove-AppxPackage
+    Write-Host "Uninstalled Handwriting" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MIP* | Remove-AppxPackage
+    Write-Host "Uninstalled Math Input Panel" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MixedReality* | Remove-AppxPackage
+    Write-Host "Uninstalled Mixed Reality" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.People* | Remove-AppxPackage
+    Write-Host "Uninstalled People" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.SkypeApp* | Remove-AppxPackage
+    Write-Host "Uninstalled Skype" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
+    Write-Host "Uninstalled Solitaire" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Windows.ScreenSketch* | Remove-AppxPackage
+    Write-Host "Uninstalled Step Recorder" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Wallet* | Remove-AppxPackage
+    Write-Host "Uninstalled Wallet" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Bing* | Remove-AppxPackage
+    Write-Host "Uninstalled Bing Search" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.WindowsFamilySafety* | Remove-AppxPackage
+    Write-Host "Uninstalled Family" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.OneSync* | Remove-AppxPackage
+    Write-Host "Uninstalled OneSync" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage
+    Write-Host "Uninstalled Paint 3D" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.MicrosoftQuickAssist* | Remove-AppxPackage
+    Write-Host "Uninstalled Quick Assist" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Speech* | Remove-AppxPackage
+    Write-Host "Uninstalled Speech" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage
+    Write-Host "Uninstalled Tips" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.WindowsVoiceRecorder* | Remove-AppxPackage
+    Write-Host "Uninstalled Voice Recorder" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.BingWeather* | Remove-AppxPackage
+    Write-Host "Uninstalled Weather" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.WindowsHello* | Remove-AppxPackage
+    Write-Host "Uninstalled Windows Hello" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.Wordpad* | Remove-AppxPackage
+    Write-Host "Uninstalled Wordpad" -ForegroundColor Green
+
+    Get-AppxPackage *Microsoft.YourPhone* | Remove-AppxPackage
+    Write-Host "Uninstalled Your Phone" -ForegroundColor Green
+
+    Write-host "Wait a min and let everything run"
+    Pause
+}
+
+function Adminrun {
+    $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+
+    $principal = New-Object System.Security.Principal.WindowsPrincipal($identity)
+    
+    if ($principal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host "                  Running with Administrator" -ForegroundColor Green
+    }
+    else {
+        Write-Host "                Running without Administrator" -ForegroundColor Red
+    }
+}
+
 function Show-Menu{
     $Title = "__          ___                     _        _____           
 \ \        / (_)         /\        | |      / ____|          
@@ -398,11 +516,13 @@ function Show-Menu{
                                                    |___/     "
     Clear-Host
     Write-Host "$Title" -ForegroundColor Cyan
+    Write-Host ""
+    Adminrun
     Write-Host "=================== Made By Gamerfrankstar ===================="-ForegroundColor DarkGreen
     Write-Host ""
     Write-Host "                  1: Standard Installation"
     Write-Host "                  2: Advanced Installation"
-    Write-Host "                  3: No Bloat Installation"
+    Write-Host "                  3: De-Bloater "
     Write-Host "                  X: To Quit the program"
     Write-Host ""
     Write-host "===============================================================" -ForegroundColor DarkGreen
@@ -415,8 +535,8 @@ function Process-MenuChoice {
     switch ($Versionselect) {
         "1" { StandardInstall }
         "2" { advancedinstall }
-        "3" { Write-Host "No Bloat Installation" }
-        "X" { Write-Host "Closing the Program." }
+        "3" { nobloat }
+        "X" {  }
         default { Write-Host "Invalid option, please try again." }
     }
 }
